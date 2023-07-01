@@ -60,4 +60,9 @@ class InvoiceManager
             throw $exception;
         }
     }
+
+    public function delete($id)
+    {
+        return resolve(InvoiceRepository::class)->deleteInvoice($id);
+    }
 }
