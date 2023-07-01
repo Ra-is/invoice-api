@@ -20,7 +20,7 @@ class CreateItemsTable extends Migration
             $table->integer('quantity');
             $table->decimal('amount', 8, 2);
             $table->string('description');
-            $table->tinyInteger('available_quantity')->default(0);
+            $table->integer('available_quantity')->default(0);
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
         });
