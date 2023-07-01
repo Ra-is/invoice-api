@@ -3,6 +3,7 @@
 namespace App\Service\Invoice;
 
 use App\Exceptions\InvoiceException;
+use App\Service\Item\ItemRepository;
 use Exception;
 
 class InvoiceManager
@@ -27,11 +28,38 @@ class InvoiceManager
 
     public function create($request)
     {
-        $data = [];
-
+        $data = [
+            'issue_date'=>$request->issue_date,
+            'due_date'=>$request->due_date,
+            'customer_id'=>$request->customer_id,
+        ];
         try
         {
-            return resolve(InvoiceRepository::class)->createInvoice($data);
+            
+            $items = $request->items;
+            if(count($items))
+            {
+                foreach ($items as $itemData) {
+                    $item = resolve(ItemRepository::class)->get($itemData['item_id']);
+                    if ($item->available_quantity < $itemData['quantity']) {
+                        throw new InvoiceException('Insufficient quantity for item');
+                    }
+                    $item->sell($itemData['quantity']);
+                }
+
+                
+                $invoice = resolve(InvoiceRepository::class)->createInvoice($data);
+                foreach ($items as $itemData) {
+                    $invoice->items()->create($itemData);
+                }
+
+                return $invoice;
+            }
+            else
+            {
+                throw new InvoiceException('No Items found in the payload');
+            }
+
         }
         catch(InvoiceException $invoiceException)
         {
