@@ -9,7 +9,8 @@ class SuccessResponse extends FormSubmitSuccess
         return response()->json(
             [
                 'success'        => true,
-                'data' => $request->data
+                'data' => $request->data,
+                'message'=> $request->message ?? 'No Message Set'
             ],
             200
         );

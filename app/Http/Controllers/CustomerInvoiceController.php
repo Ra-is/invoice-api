@@ -65,12 +65,7 @@ class CustomerInvoiceController extends Controller
         try
         {
            $response = resolve(InvoiceManager::class)->create($request);
-           $request->merge(
-            [
-                'message' => 'Created',
-                'data' => $response
-            ]
-        );
+           $request->merge(['message' => 'Created','data' => $response]);
            return new SuccessResponse($request);
         }
         catch (HttpResponseException $exception) {

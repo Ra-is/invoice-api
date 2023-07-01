@@ -39,18 +39,58 @@ class InvoiceManager
             $items = $request->items;
             if(count($items))
             {
+                $itemQuantities = [];
+                $availableItem = [];
                 foreach ($items as $itemData) {
-                    $item = resolve(ItemRepository::class)->get($itemData['item_id']);
-                    if ($item->available_quantity < $itemData['quantity']) {
-                        throw new InvoiceException('Insufficient quantity for item');
+                    $itemId = $itemData['invoice_item_id'];
+                    
+                    if (!isset($itemQuantities[$itemId])) {
+                        $itemQuantities[$itemId] = 0;
                     }
-                    $item->sell($itemData['quantity']);
+                    $itemQuantities[$itemId] += $itemData['quantity'];
+                    //return $itemQuantities[$itemId];
+
+                    $item = resolve(ItemRepository::class)->get($itemData['invoice_item_id']);
+
+                    // let us check if the item we want to create already exist in the system
+                    if($item)
+                    {
+                        if ($item->available_quantity < $itemQuantities[$itemId]) {
+                            throw new InvoiceException('Insufficient quantity for item');
+                        }
+                        $item->sell($itemData['quantity']);
+
+                        $availableItem[$itemId] = $item->available_quantity;
+
+                    }
+                    
                 }
 
                 
                 $invoice = resolve(InvoiceRepository::class)->createInvoice($data);
                 foreach ($items as $itemData) {
-                    $invoice->items()->create($itemData);
+                    
+                    $itemId = $itemData['invoice_item_id'];
+                    
+                    // let us check if the item already exist
+                    // if it exist we replace the item with the new value 
+                   if(isset($availableItem[$itemId]))
+                   {
+                    $newItem = array_merge([
+                        'available_quantity' => $availableItem[$itemId]
+                    ],$itemData);
+                    
+                    $invoice->items()->create($newItem);
+                   }
+                   else
+                   {
+                    $newItem = array_merge([
+                            'available_quantity' => 6
+                        ],$itemData);
+
+                        $invoice->items()->create($newItem);
+                   }
+                   
                 }
 
                 return $invoice;

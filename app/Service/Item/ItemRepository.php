@@ -12,6 +12,6 @@ class ItemRepository
     }
     public function get($id)
     {
-        return Item::where('id',$id)->first();
+        return Item::where('invoice_item_id', $id)->latest()->first();
     }
 }

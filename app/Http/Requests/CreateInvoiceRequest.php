@@ -33,7 +33,7 @@ class CreateInvoiceRequest extends FormRequest
             'due_date' => 'required|date',
             'customer_id' => 'required|exists:customers,id',
             'items' => 'required|array',
-            'items.*.item_id' => 'required|numeric',
+            'items.*.invoice_item_id' => 'required|numeric',
             'items.*.unit_price' => 'required|numeric',
             'items.*.quantity' => 'required|integer',
             'items.*.amount' => 'required|numeric',

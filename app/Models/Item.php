@@ -13,7 +13,13 @@ class Item extends Model
     public function sell($quantity)
     {
         $this->available_quantity -= $quantity;
+        
+        if ($this->available_quantity < 0) {
+            $this->available_quantity = 0;
+        }
+    
         $this->save();
     }
+    
 
 }
