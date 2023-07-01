@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Service\Invoice;
+
+use App\Models\Invoice;
+
+class InvoiceRepository
+{
+    public function getAllInvoice()
+    {
+       return Invoice::all();
+    }
+
+    public function getSingle($id)
+    {
+        $invoice = Invoice::where('id',$id)->first();
+        if($invoice)
+        {
+            return $invoice;
+        }
+        return null;
+    }
+
+    public function createInvoice($data)
+    {
+        return Invoice::create($data);
+    }
+
+    public function updateInvoice($data, $id)
+    {
+        $invoice = Invoice::where('id',$id)->first();
+        if($invoice)
+        {
+            $invoice->updaate($data);
+            return $invoice;
+        }
+        return null;
+    }
+
+    public function deleteInvoice($id)
+    {
+        $invoice = Invoice::where('id',$id)->first();
+        if($invoice)
+        {
+            $invoice->delete();
+            return 1;
+        }
+        return null;
+    }
+}
