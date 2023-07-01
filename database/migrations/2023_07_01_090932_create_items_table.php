@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->decimal('unit_price', 8, 2);
             $table->integer('quantity');
             $table->decimal('amount', 8, 2);
-            $table->string('description');
+            $table->text('description');
             $table->integer('available_quantity')->default(0);
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
