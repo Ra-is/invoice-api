@@ -15,19 +15,17 @@ use Illuminate\Http\Request;
 
 class CustomerInvoiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $invoices = resolve(InvoiceManager::class)->getAll();
+        
         if(count($invoices))
         {
             $response = [
                 'message' => 'Retrieve',
                 'data'=>$invoices
             ];
-        
-            $request = new Request();
             $request->merge($response);
-        
             return new SuccessResponse($request);
         }
         else
@@ -37,26 +35,28 @@ class CustomerInvoiceController extends Controller
         
     }
 
-    public function get($id)
+    public function get(Request $request, $id)
     {
 
-        $invoice = resolve(InvoiceManager::class)->get($id);
-        if($invoice)
+        try
         {
+            $invoice = resolve(InvoiceManager::class)->get($id);
             $response = [
                 'message' => 'Retrieve',
                 'data'=>$invoice
             ];
-        
-            $request = new Request();
             $request->merge($response);
-        
             return new SuccessResponse($request);
         }
-        else
+        catch(InvoiceException $exception)
         {
-            return new ErrorResponse("No Invoice found for this id $id");
+            return new ErrorResponse($exception->getMessage());
         }
+        catch(Exception $exception)
+        {
+            report($exception);
+            return new ErrorResponse('Something went wrong');
+        } 
 
     }
 
@@ -79,7 +79,7 @@ class CustomerInvoiceController extends Controller
         catch(InvoiceException $exception)
         {
             report($exception);
-            return new ErrorResponse('Could not create invoice');
+            return new ErrorResponse($exception->getMessage());
         }
         catch(Exception $exception)
         {
@@ -116,25 +116,26 @@ class CustomerInvoiceController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
-
-        $invoice = resolve(InvoiceManager::class)->delete($id);
-        if($invoice)
+        try
         {
+            $invoice = resolve(InvoiceManager::class)->delete($id);
             $response = [
                 'message' => 'Deleted'
             ];
-        
-            $request = new Request();
-            $request->merge(['data' => $response]);
-        
+            $request->merge($response);
             return new SuccessResponse($request);
         }
-        else
+        catch(InvoiceException $exception)
         {
-            return new ErrorResponse("No Invoice found for this id $id");
+            return new ErrorResponse($exception->getMessage());
         }
+        catch(Exception $exception)
+        {
+            report($exception);
+            return new ErrorResponse('Something went wrong');
+        } 
 
     }
 }

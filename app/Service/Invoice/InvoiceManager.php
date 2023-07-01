@@ -91,6 +91,14 @@ class InvoiceManager
 
     public function delete($id)
     {
-        return resolve(InvoiceRepository::class)->deleteInvoice($id);
+        $deleted =  resolve(InvoiceRepository::class)->deleteInvoice($id);
+        if($deleted)
+        {
+            return true;
+        }
+        else
+        {
+            throw new InvoiceException("Could not delete this id: $id");
+        }
     }
 }

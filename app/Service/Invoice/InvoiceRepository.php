@@ -8,12 +8,12 @@ class InvoiceRepository
 {
     public function getAllInvoice()
     {
-       return Invoice::all();
+       return Invoice::with(['customer','items'])->get();
     }
 
     public function getSingle($id)
     {
-        $invoice = Invoice::where('id',$id)->first();
+        $invoice = Invoice::where('id',$id)->with(['customer','items'])->first();
         if($invoice)
         {
             return $invoice;

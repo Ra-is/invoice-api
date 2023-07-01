@@ -24,7 +24,7 @@ class ErrorResponse implements Responsable
             'success' => false,
             'errors'  => [],
             'message' => $this->message
-        ]);
+        ],500);
     }
 }
 
