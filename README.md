@@ -2,6 +2,11 @@
 
 The Invoicing REST Backend API is a PHP Laravel-based project that aims to provide a robust and efficient solution for managing and generating invoices. The API allows users to create and manage invoices, track inventory, and implement user authentication and authorization. For simplicity this api uses the basic authentication
 
+## Documentation
+
+See the [documentation](https://documenter.getpostman.com/view/21869124/2s93zCYL9M) for sample request and response
+
+
 ## Table of Contents
 
 - [Project Description](#project-description)
@@ -9,8 +14,7 @@ The Invoicing REST Backend API is a PHP Laravel-based project that aims to provi
 - [Usage](#usage)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Project Description
 
@@ -69,17 +73,35 @@ You can now access the server at http://localhost:8000
 
 ## Features
 
-List the main features or functionalities of your project.
+Main features.
 
+You can have access to the api sample request and response at https://documenter.getpostman.com/view/21869124/2s93zCYL9M
 - Creating Invoice
+    Method: POST
+    endpoint: /api/invoices
+    Body: json
 - Updating Invoice
+    Method: PUT
+    endpoint: /api/invoices/{id}
+    Body: json
 - Get All Invoice
+    Method: GET
+    endpoint: /api/invoices
+    Body: None
 - Get Specific Invoice
+     Method: GET
+     endpoint: /api/invoices/{id}
+     Body: None
 - Delete Invoice
+    Method: DELETE
+     endpoint: /api/invoices/{id}
+     Body: None
 
 ## Technologies Used
 
 - Laravel
+
+
 
 
 
