@@ -75,27 +75,33 @@ You can now access the server at http://localhost:8000
 
 Main features.
 
-You can have access to the api sample request and response at https://documenter.getpostman.com/view/21869124/2s93zCYL9M
-- Creating Invoice
-    Method: POST
-    endpoint: /api/invoices
-    Body: json
-- Updating Invoice
-    Method: PUT
-    endpoint: /api/invoices/{id}
-    Body: json
-- Get All Invoice
-    Method: GET
-    endpoint: /api/invoices
-    Body: None
-- Get Specific Invoice
-     Method: GET
-     endpoint: /api/invoices/{id}
-     Body: None
-- Delete Invoice
-    Method: DELETE
-     endpoint: /api/invoices/{id}
-     Body: None
+You can have access to the API sample request and response at [API Documentation](https://documenter.getpostman.com/view/21869124/2s93zCYL9M).
+
+- **Creating Invoice**
+    - Method: POST
+    - Endpoint: `/api/invoices`
+    - Body: JSON
+
+- **Updating Invoice**
+    - Method: PUT
+    - Endpoint: `/api/invoices/{id}`
+    - Body: JSON
+
+- **Get All Invoice**
+    - Method: GET
+    - Endpoint: `/api/invoices`
+    - Body: None
+
+- **Get Specific Invoice**
+    - Method: GET
+    - Endpoint: `/api/invoices/{id}`
+    - Body: None
+
+- **Delete Invoice**
+    - Method: DELETE
+    - Endpoint: `/api/invoices/{id}`
+    - Body: None
+
 
 ## Technologies Used
 
