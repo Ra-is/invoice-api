@@ -109,7 +109,7 @@ You can have access to the API sample request and response at [API Documentation
 
 ## Technologies Used
 
-- Laravel
+- Laravel 8
 
 
 
