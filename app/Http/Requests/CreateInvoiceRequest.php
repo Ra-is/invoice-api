@@ -41,6 +41,19 @@ class CreateInvoiceRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+    return [
+        'items.*.invoice_item_id.required' => 'The invoice item ID is required.',
+        'items.*.invoice_item_id.exists' => 'The selected invoice item ID is invalid.',
+        'items.*.unit_price.numeric' => 'The unit price must be a numeric value.',
+        'items.*.quantity.integer' => 'The quantity must be an integer value.',
+        'items.*.amount.numeric' => 'The amount must be a numeric value.',
+        'items.*.description.string' => 'The description must be a string.',
+    ];
+    
+    }
+
 
     /**
      * Handle a failed validation attempt.

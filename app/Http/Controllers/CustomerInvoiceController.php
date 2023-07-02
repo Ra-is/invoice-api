@@ -90,7 +90,7 @@ class CustomerInvoiceController extends Controller
            $response = resolve(InvoiceManager::class)->update($request, $id);
            $request->merge(
             [
-                'message' => 'Updated',
+                'message' => 'Updated Successfully',
                 'data' => $response
             ]
         );
@@ -102,7 +102,7 @@ class CustomerInvoiceController extends Controller
         catch(InvoiceException $exception)
         {
             report($exception);
-            return new ErrorResponse('Could not update invoice');
+            return new ErrorResponse($exception->getMessage());
         }
         catch(Exception $exception)
         {
