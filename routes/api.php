@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('invoices')->group(function () {
+Route::middleware('auth.verified')->prefix('invoices')->group(function () {
     Route::get('/', [CustomerInvoiceController::class,'index']);
     Route::post('/', [CustomerInvoiceController::class,'create']);
     Route::get('/{id}', [CustomerInvoiceController::class,'get']);
