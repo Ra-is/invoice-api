@@ -70,6 +70,10 @@ Start the local development server
 
 You can now access the server at http://localhost:8000
 
+The api uses basic auth
+
+    username: testuser password: testpassword
+
 
 ## Features
 
