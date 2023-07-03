@@ -30,7 +30,7 @@ See the [documentation](https://documenter.getpostman.com/view/21869124/2s93zCYL
 
 - **Inventory Tracking**: The API includes features to prevent overselling by implementing item creation and inventory tracking. This ensures that the user cannot sell more items than are available in stock, thus helping maintain accurate inventory levels.
 
-- **User Authentication and Authorization**: The API uses basic authentication to secure the endpointa
+- **User Authentication and Authorization**: The API uses basic authentication to secure the endpoints
 
 
 ## Installation
