@@ -112,7 +112,7 @@ You can have access to the API sample request and response at [API Documentation
 | issue_date      | This field represents the date when the invoice was created |
 | due_date        | This field represents the date when the invoice was completed |
 | customer_id     | The ID of the customer |
-| items           | An array containig at list one item |
+| items           | An array containig at least one item |
 | invoice_item_id | This field is used to track the same item. This is also used to reduce the item in the system to prevent over selling |
 | unit_price      | This field represents the price of a single unit of an item |
 | amount          | This field represents the total amount for a specific item on the invoice.|
